@@ -10,3 +10,13 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    created: function () {
+      if (!this.$auth.isAuthenticated()) {
+        window.location = '/#/login'
+      }
+    }
+  }
+</script>

@@ -29,6 +29,11 @@ export default {
       response: null
     }
   },
+  created: function () {
+    if (this.$auth.isAuthenticated()) {
+      window.location = '/#/'
+    }
+  },
   methods: {
     auth: function () {
       if (this.$auth.isAuthenticated()) {

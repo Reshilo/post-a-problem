@@ -10,9 +10,7 @@
 export default {
   created: function () {
     if (!this.$auth.isAuthenticated()) {
-      console.log('not logged in')
-    } else {
-      console.log('is logged in')
+      window.location = '/#/login'
     }
   }
 }

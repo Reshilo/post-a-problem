@@ -18,6 +18,11 @@
         }
       }
     },
+    created: function () {
+      if (!this.$auth.isAuthenticated()) {
+        window.location = '/#/login'
+      }
+    },
     methods: {
       submit: function () {
         var this_ = this
