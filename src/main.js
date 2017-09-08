@@ -9,14 +9,6 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
-})
-
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VueAuthenticate, {
@@ -38,3 +30,10 @@ Vue.use(VueAuthenticate, {
   }
 })
 
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  template: '<App/>',
+  components: { App }
+})

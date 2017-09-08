@@ -5,3 +5,15 @@
     <button v-on:click="test()">Test</button>
   </div>
 </template>
+
+<script>
+export default {
+  created: function () {
+    if (!this.$auth.isAuthenticated()) {
+      console.log('not logged in')
+    } else {
+      console.log('is logged in')
+    }
+  }
+}
+</script>
