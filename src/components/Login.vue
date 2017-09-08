@@ -2,7 +2,7 @@
   <div>
    <h1>Prijavi se</h1>
   <div class="form-group">
-     <button v-on:click="auth('zendesk')" class="btn btn-primary">Login with ZenDesk</button>
+     <button v-on:click="auth()" class="btn btn-primary">Login with ZenDesk</button>
   </div>
 <form>
   <div class="form-group">
@@ -23,11 +23,32 @@
 </template>
 
 <script>
-  export default {
-    methods: {
-      auth: function (provider) {
-        console.log(provider)
+export default {
+  data: function () {
+    return {
+      response: null
+    }
+  },
+  methods: {
+    auth: function () {
+      if (this.$auth.isAuthenticated()) {
+        this.$auth.logout()
       }
+
+      this.response = null
+
+      var this_ = this
+      this.$auth.authenticate('zendesk').then(function (authResponse) {
+        console.log(authResponse)
+        console.log(this_.$auth.isAuthenticated())
+
+        this_.$http.get('https://probprob.zendesk.com/api/v2/users/me.json').then(function (response) {
+          this_.response = response
+        })
+      }).catch(function (err) {
+        this_.response = err
+      })
     }
   }
+}
 </script>
