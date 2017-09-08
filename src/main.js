@@ -20,19 +20,20 @@ new Vue({
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VueAuthenticate, {
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'http://localhost:8080',
   providers: {
     zendesk: {
       name: 'zendesk',
       url: '/auth/zendesk',
-      authorizationEndpoint: 'https://www.zendesk.com/oauth/v2/authorization',
-      redirectUri: null,
-      requiredUrlParams: ['state'],
-      scope: ['r_emailaddress'],
+      authorizationEndpoint: 'https://probprob.zendesk.com/oauth/authorizations/new',
+      requiredUrlParams: ['response_type', 'client_id', 'scope'],
+      responseType: 'token',
+      clientId: 'webapp',
+      scope: ['read', 'write'],
       scopeDelimiter: ' ',
-      state: 'STATE',
+      redirectUri: 'http://localhost:8080/auth/callback',
       oauthType: '2.0',
-      popupOptions: { width: 527, height: 582 }
+      popupOptions: {width: 480, height: 640}
     }
   }
 })
