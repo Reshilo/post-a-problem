@@ -1,28 +1,32 @@
 <template>
   <div>
-  <button v-on:click="auth('zendesk')" class="btn btn-primary">Login with ZenDesk</button>
+  <div class="form-group">
+     <button v-on:click="auth('zendesk')" class="btn btn-primary">Login with ZenDesk</button>
+  </div>
 <form>
   <div class="form-group">
-    <label for="formGroupExampleInput">Example label</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+    <input type="text" class="form-control" placeholder="email">
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">Another label</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+    <input type="text" class="form-control" placeholder="password">
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">uloguj se</button>
+  </div>
+  <div class="form-group-link">
+    <a href="javascript:;">Zaboravili ste lozinku?</a>
+    <a href="javascript:;">Niste registrovani?</a>
   </div>
 </form>
 </div>
 </template>
 
 <script>
-export default {
-  methods: {
-    auth: function (provider) {
-      console.log(provider)
+  export default {
+    methods: {
+      auth: function (provider) {
+        console.log(provider)
+      }
     }
   }
-}
 </script>
