@@ -1,17 +1,22 @@
 <template>
   <div>
-  <button v-on:click="auth()" class="btn btn-primary">Login with ZenDesk</button>
+   <h1>Prijavi se</h1>
+  <div class="form-group">
+     <button v-on:click="auth()" class="btn btn-primary">Login with ZenDesk</button>
+  </div>
 <form>
   <div class="form-group">
-    <label for="formGroupExampleInput">Example label</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+    <input type="text" class="form-control" id="email-login" name="email" placeholder="email">
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">Another label</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+    <input type="text" class="form-control" id="password-login" name="password" placeholder="lozinka">
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">uloguj se</button>
+  </div>
+  <div class="form-group-link">
+    <a href="javascript:;">Zaboravili ste lozinku?</a>
+    <a href="javascript:;">Niste registrovani?</a>
   </div>
 </form>
 </div>
