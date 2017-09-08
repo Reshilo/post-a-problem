@@ -1,6 +1,6 @@
 <template>
   <div>
-  <a v-on:click="auth('zendesk')">Login with ZenDesk</a>
+  <button v-on:click="auth('zendesk')" class="btn btn-primary">Login with ZenDesk</button>
 <form>
   <div class="form-group">
     <label for="formGroupExampleInput">Example label</label>
@@ -11,8 +11,7 @@
     <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">Another label</label>
-    <input type="submit" class="form-control" placeholder="login">
+    <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
 </div>
