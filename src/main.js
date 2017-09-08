@@ -20,7 +20,7 @@ new Vue({
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VueAuthenticate, {
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'https://probprob.zendesk.com/api/v2/',
   providers: {
     zendesk: {
       name: 'zendesk',
@@ -37,3 +37,4 @@ Vue.use(VueAuthenticate, {
     }
   }
 })
+

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '@/components/Index'
+import Ticket from '@/components/Ticket'
 import Login from '@/components/Login'
 import Registration from '@/components/Registration'
 
@@ -12,6 +13,11 @@ export default new VueRouter({
       path: '/',
       name: 'Post-a-Problem',
       component: Index
+    },
+    {
+      path: '/ticket',
+      name: 'Ticket',
+      component: Ticket
     },
     {
       path: '/login',

@@ -42,7 +42,9 @@ export default {
         console.log(authResponse)
         console.log(this_.$auth.isAuthenticated())
 
-        this_.$http.get('https://probprob.zendesk.com/api/v2/users/me.json').then(function (response) {
+        this_.$http.get('https://probprob.zendesk.com/api/v2/users/me.json', {
+          headers: { Authorization: 'Bearer ' + this_.$auth.getToken() }
+        }).then(function (response) {
           this_.response = response
         })
       }).catch(function (err) {
