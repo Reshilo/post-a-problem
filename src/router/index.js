@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Registration from '@/components/Registration'
+import Profile from '@/components/Profile'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ export default new VueRouter({
       path: '/registration',
       name: 'Registration',
       component: Registration
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     }
 
   ]
