@@ -6,5 +6,7 @@
     <div class="second-half">
       <a href="javascript:;">Podešavanja</a>
     </div>
+    <div>
+    </div>
   </div>
 </template>
