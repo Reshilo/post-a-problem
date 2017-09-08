@@ -18,7 +18,7 @@
     <button type="submit" class="btn btn-primary">Registruj se</button>
   </div>
   <div class="form-group-link">
-    <a href="javascript:;">Već imate nalog?</a>
+    <a href="javascript:;">Uloguj se</a>
   </div>
 </form>
 </div>
