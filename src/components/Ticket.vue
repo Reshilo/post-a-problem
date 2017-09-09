@@ -227,16 +227,26 @@
         this.uploadAttachment(files[0])
       },
       uploadAttachment: function (file) {
-        let url = 'https://probprob.zendesk.com/api/v2/uploads.json?filename=' + file.name
-        let headers = {
-          'Authorization': 'Bearer ' + this.$auth.getToken()
+        let this_ = this
+        let reader = new FileReader()
+        reader.onloadend = function () {
+
+          console.log(reader.result)
+
+          let url = 'https://probprob.zendesk.com/api/v2/uploads.json?filename=' + encodeURIComponent(file.name)
+          let headers = {
+            'Authorization': 'Bearer ' + this_.$auth.getToken(),
+            'Content-Type': 'application/binary'
+          }
+          let fileUpload = new FileUpload(url, headers)
+          fileUpload.upload(reader.result).then((e) => {
+            console.warn(e.target.response.upload.attachment.width, e.target.response.upload.attachment.height)
+            this_.addAttachment(e.target.response.upload.token)
+          }).catch((e) => {
+            this_.$emit('error', e)
+          })
         }
-        let fileUpload = new FileUpload(url, headers)
-        fileUpload.upload(file).then((e) => {
-          this.addAttachment(e.target.response.upload.token)
-        }).catch((e) => {
-          this.$emit('error', e)
-        })
+        reader.readAsBinaryString(file)
       },
       addAttachment: function (token) {
         // this.ticket.comment.uploads.push(token)
