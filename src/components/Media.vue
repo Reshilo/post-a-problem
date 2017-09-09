@@ -1,24 +1,23 @@
 <template>
 <div>
-  <h1>Prijavi se</h1>
-  <div class="form-group">
-    <button v-on:click="auth()" class="btn btn-primary">Login with ZenDesk</button>
-  </div>
-  <form>
+  <form action="/" method="get" class="form">
     <div class="form-group">
-      <input type="text" class="form-control" id="email-login" name="email" placeholder="email">
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="password-login" name="password" placeholder="lozinka">
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">uloguj se</button>
-    </div>
-    <div class="form-group-link">
-      <a href="javascript:;">Zaboravili ste lozinku?</a>
-      <a href="javascript:;">Niste registrovani?</a>
+      <input type="text" class="form-control" id="descrpition" name="descrpition" placeholder="Dodaj opis">
+      <!-- <label for="descrpition">Dodaj opis</label> -->
+      <button type="button" class="btn">Poništi</button>
+      <button type="submit" class="btn">Pošalji</button>
+
     </div>
   </form>
+  <video></video>
+  <div class="bottom-menu">
+    <ul>
+      <li><a href="javascript:;"><img src="#" class="media-icon">foto</a></li>
+      <li><a href="javascript:;"><img src="#" class="media-icon">video</a></li>
+      <li><a href="javascript:;"><img src="#" class="media-icon">audio</a></li>
+      <li><a href="javascript:;"><img src="#" class="media-icon">type</a></li>
+    </ul>
+  </div>
 </div>
 </template>
 <script>
@@ -56,3 +55,9 @@
     }
   }
 </script>
+
+<style scoped>
+  h1 {
+    color: orange;
+  }
+</style>
