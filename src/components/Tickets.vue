@@ -2,7 +2,7 @@
     <div>
         <h2>Your Tickets</h2>
         <div class="list-group">
-            <router-link v-for="ticket in tickets" :to="{ name: 'ticket', params: { id: ticket.id }}" class="list-group-item list-group-item-action">
+            <router-link v-for="ticket in tickets" :to="{ name: 'ticket', params: { id: ticket.id }}" :key="item.id" class="list-group-item list-group-item-action">
                 {{ticket.subject}}
             </router-link>
         </div>
