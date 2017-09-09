@@ -16,17 +16,22 @@ export default new VueRouter({
       component: Index
     },
     {
-      path: '/ticket/new',
+      path: '/tickets',
       name: 'Ticket',
       component: Ticket
     },
     {
-      path: '/ticket/{id}',
+      path: '/tickets/new',
       name: 'Ticket',
       component: Ticket
     },
     {
-      path: '/ticket/{id}/edit',
+      path: '/tickets/{id}',
+      name: 'Ticket',
+      component: Ticket
+    },
+    {
+      path: '/tickets/{id}/edit',
       name: 'Ticket',
       component: Ticket
     },
