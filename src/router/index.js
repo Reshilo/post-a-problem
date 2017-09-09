@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '@/components/Index'
 import Ticket from '@/components/Ticket'
+import Tickets from '@/components/Tickets'
 import Login from '@/components/Login'
 import Registration from '@/components/Registration'
 import Profile from '@/components/Profile'
@@ -18,8 +19,8 @@ export default new VueRouter({
     },
     {
       path: '/tickets',
-      name: 'Ticket',
-      component: Ticket
+      name: 'Tickets',
+      component: Tickets
     },
     {
       path: '/tickets/new',

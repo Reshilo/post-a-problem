@@ -19,6 +19,7 @@
       }
     },
     created: function () {
+      console.log(this.$auth)
       if (!this.$auth.isAuthenticated()) {
         window.location = '/#/login'
       }
@@ -29,7 +30,9 @@
         this_.$http.post('https://probprob.zendesk.com/api/v2/tickets.json', {
           ticket: this.ticket
         }, {
-          headers: { Authorization: 'Bearer ' + this_.$auth.getToken() }
+          headers: {
+            Authorization: 'Bearer ' + this_.$auth.getToken()
+          }
         }).then(function (response) {
           this_.response = response
         })
