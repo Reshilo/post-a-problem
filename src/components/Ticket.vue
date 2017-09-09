@@ -230,10 +230,10 @@
         let this_ = this
         let reader = new FileReader()
         reader.onloadend = function () {
-          let url = 'https://probprob.zendesk.com/api/v2/uploads.json?filename=' + encodeURIComponent(file.name)
+          let url = 'https://probprob.zendesk.com/api/v2/uploads.json?filename=' + encodeURI(file.name)
           let headers = {
             'Authorization': 'Bearer ' + this_.$auth.getToken(),
-            'Content-Type': 'application/binary'
+            //'Content-Type': file.type
           }
           let fileUpload = new FileUpload(url, headers)
           fileUpload.upload(reader.result).then((e) => {
@@ -243,7 +243,7 @@
             this_.$emit('error', e)
           })
         }
-        reader.readAsBinaryString(file)
+        reader.readAsArrayBuffer(file)
       },
       addAttachment: function (token) {
         // this.ticket.comment.uploads.push(token)

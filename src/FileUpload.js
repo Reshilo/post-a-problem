@@ -21,9 +21,7 @@ class FileUpload {
     })
 
     // Start upload
-    let formData = new FormData()
-    formData.append('file', file)
-    xhr.send(formData)
+    xhr.send(file)
 
     return promise
   }
