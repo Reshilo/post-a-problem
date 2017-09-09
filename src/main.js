@@ -9,18 +9,10 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
-})
-
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VueAuthenticate, {
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'https://probprob.zendesk.com/api/v2/',
   providers: {
     zendesk: {
       name: 'zendesk',
@@ -36,4 +28,12 @@ Vue.use(VueAuthenticate, {
       popupOptions: {width: 480, height: 640}
     }
   }
+})
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  template: '<App/>',
+  components: { App }
 })
