@@ -5,7 +5,7 @@
           <input type="file" accept="image/*" v-on:change="handleAttachmentChange">
           <textarea v-model="ticket.comment.body"></textarea>
           <pre v-bind="ticket"></pre>
-          <button>Submit</button>
+          <button :disabled="disabled">Submit</button>
       </form>
       <!-- <button @click="turnCameraOn()">Turn camera on</button> -->
       <!-- <button @click="takePicture()">Take picture</button>
@@ -21,6 +21,7 @@
   export default {
     data: function () {
       return {
+        disabled: true,
         ticket: {
           subject: '',
           comment: {
@@ -238,7 +239,9 @@
         })
       },
       addAttachment: function (token) {
-        this.ticket.comment.uploads.push(token)
+        // this.ticket.comment.uploads.push(token)
+        this.ticket.comment.uploads = [token]
+        this.disabled = false
       }
     }
   }
