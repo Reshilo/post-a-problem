@@ -1,13 +1,14 @@
 <template>
     <div>
-        <p>Your ticekts</p>
+        <p>Your tickets</p>
+        <router-link :to="{ name: 'ticket_create'}" class="btn btn-default">Create</router-link>
         <ul class="">
             <li v-for="ticket in tickets">
                 <span>{{ticket.id}}</span>
                 <span>{{ticket.subject}}</span>
-                <a v-bind:href="'#/tickets/' + ticket.id">details</a>
+                <router-link :to="{ name: 'ticket', params: { id: ticket.id }}" class="btn btn-default">Details</router-link>
             </li>
-        </ul>   
+        </ul>
     </div>
 </template>
 <script>

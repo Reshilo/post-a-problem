@@ -1,17 +1,16 @@
 <template>
   <div>
-    <h1>Post-a-Problem</h1>
-    <a class="btn btn-default" href="/#/login">login</a>
-    <button v-on:click="test()">Test</button>
+    <h1>
+      <router-link :to="{ name: 'app'}">Reshilo</router-link>
+    </h1>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
   created: function () {
-    if (!this.$auth.isAuthenticated()) {
-      window.location = '/#/login'
-    }
+    //this.$router.go('list')
   }
 }
 </script>

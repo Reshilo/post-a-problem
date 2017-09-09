@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>{{ticket.subject}}</h1>
+        <router-link :to="{ name: 'ticket_edit', params: { id: ticket.id }}" class="btn btn-default">Edit</router-link>
         <p>{{ticket.description}}</p>
         <hr>
         <div v-for="comment in comments">
