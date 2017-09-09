@@ -4,6 +4,7 @@ import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Registration from '@/components/Registration'
 import Profile from '@/components/Profile'
+import Settings from '@/components/Settings'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ export default new VueRouter({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings
     }
 
   ]
