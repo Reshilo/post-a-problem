@@ -5,8 +5,9 @@
             <li v-for="ticket in tickets">
                 <span>{{ticket.id}}</span>
                 <span>{{ticket.subject}}</span>
+                <a v-bind:href="'#/tickets/' + ticket.id">details</a>
             </li>
-        </ul>
+        </ul>   
     </div>
 </template>
 <script>

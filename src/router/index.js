@@ -28,7 +28,7 @@ export default new VueRouter({
       component: Ticket
     },
     {
-      path: '/tickets/{id}',
+      path: '/tickets/:id',
       name: 'Ticket',
       component: Ticket
     },
