@@ -230,9 +230,6 @@
         let this_ = this
         let reader = new FileReader()
         reader.onloadend = function () {
-
-          console.log(reader.result)
-
           let url = 'https://probprob.zendesk.com/api/v2/uploads.json?filename=' + encodeURIComponent(file.name)
           let headers = {
             'Authorization': 'Bearer ' + this_.$auth.getToken(),
