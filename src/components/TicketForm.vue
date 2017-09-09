@@ -1,17 +1,24 @@
 <template>
     <div>
-      <form @submit.prevent="submit()">
-          <input v-model="ticket.subject">
-          <input type="file" accept="image/*" v-on:change="handleAttachmentChange">
-          <textarea v-model="ticket.comment.body"></textarea>
-          <pre v-bind="ticket"></pre>
-          <button :disabled="disabled">Submit</button>
-      </form>
-      <!-- <button @click="turnCameraOn()">Turn camera on</button> -->
-      <!-- <button @click="takePicture()">Take picture</button>
-      <video muted autoplay></video>
-      <img id="photo"></img>
-      <canvas></canvas> -->
+        <h2>Create Ticket</h2>
+        <form @submit.prevent="submit()">
+            <div class="form-group">
+                <input v-model="ticket.subject" class="form-control" placeholder="Type Subject here">
+            </div>
+            <div class="form-group">
+                <input type="file" accept="image/*" v-on:change="handleAttachmentChange" class="form-control">
+            </div>
+            <div class="form-group">
+                <textarea v-model="ticket.comment.body" class="form-control"
+                          placeholder="Type more details here"></textarea>
+            </div>
+            <button :disabled="disabled" class="btn btn-primary btn-lg">Submit</button>
+        </form>
+        <!-- <button @click="turnCameraOn()">Turn camera on</button> -->
+        <!-- <button @click="takePicture()">Take picture</button>
+        <video muted autoplay></video>
+        <img id="photo"></img>
+        <canvas></canvas> -->
     </div>
 </template>
 
@@ -39,67 +46,68 @@
       if (!this.$auth.isAuthenticated()) {
         this.$router.push({name: 'login'})
       }
-        var that = this;
+      var that = this
 
-        var gl = navigator.geolocation
-        gl.getCurrentPosition(function(position) {
-          var href = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=15&size=1200x1200&sensor=false";
-          href += '&markers=color:blue%7Clabel:S%7C' + position.coords.latitude + ',' + position.coords.longitude
-          var mapLink = '<a href="' + href + '">map</a>'
-          that.ticket.map = mapLink
-        }.bind(this))
+      var gl = navigator.geolocation
+      gl.getCurrentPosition(function (position) {
+        var href = 'https://maps.googleapis.com/maps/api/staticmap?center=' + position.coords.latitude + ',' + position.coords.longitude + '&zoom=15&size=1200x1200&sensor=false'
+        href += '&markers=color:blue%7Clabel:S%7C' + position.coords.latitude + ',' + position.coords.longitude
+        var mapLink = '<a href="' + href + '">map</a>'
+        that.ticket.map = mapLink
+      }.bind(this))
 
-          navigator.mediaDevices.enumerateDevices()
-          .then(gotDevices).then(getStream).catch(handleError)
+      navigator.mediaDevices.enumerateDevices()
+        .then(gotDevices).then(getStream).catch(handleError)
 
-          function gotDevices (deviceInfos) {
-            // debugger
-            for (var i = 0; i !== deviceInfos.length; ++i) {
-              var deviceInfo = deviceInfos[i]
-              var option = document.createElement('option')
-              option.value = deviceInfo.deviceId
-              if (deviceInfo.kind === 'videoinput') {
-                option.text = deviceInfo.label || 'camera '
-                // console.log(deviceInfo.deviceId);
-              } else {
-                // console.log('Found ome other kind of source/device: ', deviceInfo)
-              }
-            }
+      function gotDevices (deviceInfos) {
+        // debugger
+        for (var i = 0; i !== deviceInfos.length; ++i) {
+          var deviceInfo = deviceInfos[i]
+          var option = document.createElement('option')
+          option.value = deviceInfo.deviceId
+          if (deviceInfo.kind === 'videoinput') {
+            option.text = deviceInfo.label || 'camera '
+            // console.log(deviceInfo.deviceId);
+          } else {
+            // console.log('Found ome other kind of source/device: ', deviceInfo)
           }
+        }
+      }
 
-          function getStream () {
-            if (window.stream) {
-              window.stream.getTracks().forEach(function (track) {
-                track.stop()
-              })
-            }
+      function getStream () {
+        if (window.stream) {
+          window.stream.getTracks().forEach(function (track) {
+            track.stop()
+          })
+        }
 
-            var constraints = {
-              // audio: {
-              //   optional: [{
-              //     sourceId: audioSelect.value
-              //   }]
-              // },
-              video: {
-                optional: [{
-                  sourceId: '5de6cee12c0d739ddf2dc492f37908e4f0c9d46e079a2af7f6a49d994e29ac5f'
-                }]
-              }
-            }
-
-            navigator.mediaDevices.getUserMedia(constraints)
-              .then(gotStream).catch(handleError)
+        var constraints = {
+          // audio: {
+          //   optional: [{
+          //     sourceId: audioSelect.value
+          //   }]
+          // },
+          video: {
+            optional: [{
+              sourceId: '5de6cee12c0d739ddf2dc492f37908e4f0c9d46e079a2af7f6a49d994e29ac5f'
+            }]
           }
+        }
 
-          function gotStream (stream) {
-            window.stream = stream // make stream available to console
-            // videoElement.srcObject = stream
-            that.$el.querySelector('video').srcObject = stream;
-          }
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(gotStream).catch(handleError)
+      }
 
-          function handleError (error) {
-            console.log('Error: ', error)
-          }
+      function gotStream (stream) {
+        window.stream = stream // make stream available to console
+        // videoElement.srcObject = stream
+        that.$el.querySelector('video').srcObject = stream
+      }
+
+      function handleError (error) {
+        console.log('Error: ', error)
+      }
+
       if (!this.$auth.isAuthenticated()) {
         this.$router.push({name: 'login'})
       }
@@ -107,7 +115,7 @@
     methods: {
       submit: function () {
         var this_ = this
-        this_.ticket.comment.body += this_.ticket.comment.map
+        // this_.ticket.comment.body += this_.ticket.comment.map
         // var uploadUrl = 'https://probprob.zendesk.com/api/v2/uploads.json?filename=' + this_.ticket.subject + '.png'
         // this_.$http.post(uploadUrl, {
         //   data: this_.ticket.image
@@ -124,14 +132,23 @@
 
         // })
         this_.$http.post('https://probprob.zendesk.com/api/v2/tickets.json', {
-            ticket: this_.ticket
-          }, {
-            headers: {
-              Authorization: 'Bearer ' + this_.$auth.getToken()
-            }
-          }).then(function (response) {
-            this_.response = response
-          })
+          ticket: {
+            subject: this_.ticket.subject || '[' + new Date().getTime() + ']',
+            comment: {
+              body: this_.ticket.comment.body || '[' + new Date().getTime() + ']',
+              uploads: this_.ticket.comment.uploads
+            },
+            priority: this_.ticket.priority,
+            type: this_.ticket.type
+          }
+        }, {
+          headers: {
+            Authorization: 'Bearer ' + this_.$auth.getToken()
+          }
+        }).then(function (response) {
+          this_.response = response
+          this_.$router.push({name: 'ticket', params: {id: response.body.ticket.id}})
+        })
 
       },
       details: function (id) {
@@ -148,80 +165,80 @@
       },
       turnCameraOn: function () {
 
-        var that = this;
+        var that = this
 
-          navigator.mediaDevices.enumerateDevices()
+        navigator.mediaDevices.enumerateDevices()
           .then(gotDevices).then(getStream).catch(handleError)
 
-          function gotDevices (deviceInfos) {
-            // debugger
-            for (var i = 0; i !== deviceInfos.length; ++i) {
-              var deviceInfo = deviceInfos[i]
-              var option = document.createElement('option')
-              option.value = deviceInfo.deviceId
-              if (deviceInfo.kind === 'videoinput') {
-                option.text = deviceInfo.label || 'camera '
-                // console.log(deviceInfo.deviceId);
-              } else {
-                // console.log('Found ome other kind of source/device: ', deviceInfo)
-              }
+        function gotDevices (deviceInfos) {
+          // debugger
+          for (var i = 0; i !== deviceInfos.length; ++i) {
+            var deviceInfo = deviceInfos[i]
+            var option = document.createElement('option')
+            option.value = deviceInfo.deviceId
+            if (deviceInfo.kind === 'videoinput') {
+              option.text = deviceInfo.label || 'camera '
+              // console.log(deviceInfo.deviceId);
+            } else {
+              // console.log('Found ome other kind of source/device: ', deviceInfo)
+            }
+          }
+        }
+
+        function getStream () {
+          if (window.stream) {
+            window.stream.getTracks().forEach(function (track) {
+              track.stop()
+            })
+          }
+
+          var constraints = {
+            // audio: {
+            //   optional: [{
+            //     sourceId: audioSelect.value
+            //   }]
+            // },
+            video: {
+              optional: [{
+                sourceId: '5de6cee12c0d739ddf2dc492f37908e4f0c9d46e079a2af7f6a49d994e29ac5f'
+              }]
             }
           }
 
-          function getStream () {
-            if (window.stream) {
-              window.stream.getTracks().forEach(function (track) {
-                track.stop()
-              })
-            }
+          navigator.mediaDevices.getUserMedia(constraints)
+            .then(gotStream).catch(handleError)
+        }
 
-            var constraints = {
-              // audio: {
-              //   optional: [{
-              //     sourceId: audioSelect.value
-              //   }]
-              // },
-              video: {
-                optional: [{
-                  sourceId: '5de6cee12c0d739ddf2dc492f37908e4f0c9d46e079a2af7f6a49d994e29ac5f'
-                }]
-              }
-            }
+        function gotStream (stream) {
+          window.stream = stream // make stream available to console
+          // videoElement.srcObject = stream
+          that.$el.querySelector('video').srcObject = stream
+        }
 
-            navigator.mediaDevices.getUserMedia(constraints)
-              .then(gotStream).catch(handleError)
-          }
-
-          function gotStream (stream) {
-            window.stream = stream // make stream available to console
-            // videoElement.srcObject = stream
-            that.$el.querySelector('video').srcObject = stream;
-          }
-
-          function handleError (error) {
-            console.log('Error: ', error)
-          }
+        function handleError (error) {
+          console.log('Error: ', error)
+        }
       },
       takePicture: function () {
 
-          var this_ = this
-          var canvas = this.$el.querySelector('canvas')
-          var context = canvas.getContext('2d');
-          var photo = this.$el.querySelector('#photo')
+        var this_ = this
+        var canvas = this.$el.querySelector('canvas')
+        var context = canvas.getContext('2d')
+        var photo = this.$el.querySelector('#photo')
 
-          var width = 640;    // We will scale the photo width to this
-          var height = 480;
-          if (width && height) {
-            canvas.width = width;
-            canvas.height = height;
-            context.drawImage(this.$el.querySelector('video'), 0, 0, width, height);
+        var width = 640    // We will scale the photo width to this
+        var height = 480
+        if (width && height) {
+          canvas.width = width
+          canvas.height = height
+          context.drawImage(this.$el.querySelector('video'), 0, 0, width, height)
 
-            var data = canvas.toDataURL('image/png');
-            this_.ticket.image = data;
-            photo.setAttribute('src', data);
-          } else {
-            // clearphoto();
-          }
+          var data = canvas.toDataURL('image/png')
+          this_.ticket.image = data
+          photo.setAttribute('src', data)
+        } else {
+          // clearphoto();
+        }
 
       },
       handleAttachmentChange: function (e) {
