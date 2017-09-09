@@ -33,7 +33,7 @@ export default new VueRouter({
       component: Ticket
     },
     {
-      path: '/tickets/{id}/edit',
+      path: '/tickets/:id/edit',
       name: 'Ticket',
       component: Ticket
     },

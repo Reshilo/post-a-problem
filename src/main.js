@@ -6,6 +6,8 @@ import VueResource from 'vue-resource'
 import VueAuthenticate from 'vue-authenticate'
 import App from './App'
 import router from './router'
+import { FileUpload } from 'v-file-upload'
+import 'v-file-upload/dist/v-file-upload.css'
 
 Vue.config.productionTip = false
 
@@ -29,6 +31,7 @@ Vue.use(VueAuthenticate, {
     }
   }
 })
+Vue.use(FileUpload)
 
 /* eslint-disable no-new */
 new Vue({

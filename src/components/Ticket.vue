@@ -2,6 +2,8 @@
     <div>
       <form @submit.prevent="submit()">
           <input v-model="ticket.subject">
+          <input v-model="ticket.attachment">
+          <upload/>
           <textarea v-model="ticket.comment.body"></textarea>
           <button>Submit</button>
       </form>
@@ -14,7 +16,10 @@
 </template>
 
 <script>
+  import Upload from './Upload.vue'
+
   export default {
+    components: {Upload},
     data: function () {
       return {
         ticket: {
@@ -113,7 +118,7 @@
 
         //   var token = response.body.upload.token
         //   this_.ticket.comment.uploads = [token]
-          
+
         // })
         this_.$http.post('https://probprob.zendesk.com/api/v2/tickets.json', {
             ticket: this_.ticket
@@ -207,14 +212,14 @@
             canvas.width = width;
             canvas.height = height;
             context.drawImage(this.$el.querySelector('video'), 0, 0, width, height);
-          
+
             var data = canvas.toDataURL('image/png');
             this_.ticket.image = data;
             photo.setAttribute('src', data);
           } else {
             // clearphoto();
           }
-        
+
       }
 
 
