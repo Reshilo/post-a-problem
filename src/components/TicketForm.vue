@@ -36,6 +36,9 @@
       }
     },
     created: function () {
+      if (!this.$auth.isAuthenticated()) {
+        this.$router.push({name: 'login'})
+      }
         var that = this;
 
         var gl = navigator.geolocation
@@ -98,7 +101,7 @@
             console.log('Error: ', error)
           }
       if (!this.$auth.isAuthenticated()) {
-        this.$router.push('/login')
+        this.$router.push({name: 'login'})
       }
     },
     methods: {

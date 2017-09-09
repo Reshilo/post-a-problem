@@ -16,7 +16,6 @@ export default new VueRouter({
       path: '/',
       name: 'app',
       component: Index,
-      redirect: '/tickets/list',
       children: [
         {
           path: 'tickets',
@@ -27,7 +26,7 @@ export default new VueRouter({
           children: [
             {
               path: 'list',
-              name: 'list',
+              name: 'ticket_list',
               component: Tickets
             },
             {

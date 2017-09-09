@@ -28,8 +28,8 @@
       }
     },
     created: function () {
-      if (this.$auth.isAuthenticated()) {
-        this.$router.push('/')
+      if (!this.$auth.isAuthenticated()) {
+        this.$router.push({name: 'login'})
       }
     },
     methods: {
@@ -46,7 +46,7 @@
             }
           }).then(function (response) {
             this_.response = response
-            this_.$router.push('/')
+            this_.$router.push({name: 'ticket_list'})
           })
         }).catch(function (err) {
           this_.response = err

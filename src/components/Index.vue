@@ -5,7 +5,7 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <router-link :to="{ name: 'app'}" class="navbar-brand">Reshilo</router-link>
+        <router-link :to="{ name: 'ticket_list'}" class="navbar-brand">Reshilo</router-link>
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -25,9 +25,9 @@
 export default {
   created: function () {
     if (this.$auth.isAuthenticated()) {
-      this.$router.push('/tickets/list')
+      this.$router.push({name: 'ticket_list'})
     } else {
-      this.$router.push('/login')
+      this.$router.push({name: 'login'})
     }
   }
 }

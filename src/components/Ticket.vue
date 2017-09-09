@@ -26,8 +26,10 @@
     created: function () {
       let this_ = this;
       if (!this.isNew()) {
+        if (!this.$auth.isAuthenticated()) {
+          this.$router.push({name: 'login'})
+        }
         let id = this.$route.params.id
-
         // get ticket
         this_.$http.get('https://probprob.zendesk.com/api/v2/tickets/' + id + '.json', {
           headers: {

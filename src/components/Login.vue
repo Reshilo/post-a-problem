@@ -30,7 +30,7 @@
     },
     created: function () {
       if (this.$auth.isAuthenticated()) {
-        this.$router.push('/')
+        this.$router.push({name: 'ticket_list'})
       }
     },
     methods: {
@@ -47,7 +47,7 @@
             }
           }).then(function (response) {
             this_.response = response
-            this_.$router.push('/')
+            this_.$router.push({name: 'ticket_list'})
           })
         }).catch(function (err) {
           this_.response = err

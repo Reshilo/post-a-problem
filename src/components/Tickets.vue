@@ -17,7 +17,7 @@
     },
     created: function () {
       if (!this.$auth.isAuthenticated()) {
-        this.$router.push('/login')
+        this.$router.push({name: 'login'})
       }
 
       var this_ = this
