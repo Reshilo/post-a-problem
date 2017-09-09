@@ -2,9 +2,9 @@
     <div>
       <form @submit.prevent="submit()">
           <input v-model="ticket.subject">
-          <input v-model="ticket.attachment">
-          <upload/>
+          <input type="file" accept="image/*" v-on:change="handleAttachmentChange">
           <textarea v-model="ticket.comment.body"></textarea>
+          <pre v-bind="ticket"></pre>
           <button>Submit</button>
       </form>
       <!-- <button @click="turnCameraOn()">Turn camera on</button> -->
@@ -16,10 +16,9 @@
 </template>
 
 <script>
-  import Upload from './Upload.vue'
+  import FileUpload from '../FileUpload'
 
   export default {
-    components: {Upload},
     data: function () {
       return {
         ticket: {
@@ -220,9 +219,27 @@
             // clearphoto();
           }
 
+      },
+      handleAttachmentChange: function (e) {
+        let files = e.target.files || e.dataTransfer.files
+        if (!files.length) return
+        this.uploadAttachment(files[0])
+      },
+      uploadAttachment: function (file) {
+        let url = 'https://probprob.zendesk.com/api/v2/uploads.json?filename=' + file.name
+        let headers = {
+          'Authorization': 'Bearer ' + this.$auth.getToken()
+        }
+        let fileUpload = new FileUpload(url, headers)
+        fileUpload.upload(file).then((e) => {
+          this.addAttachment(e.target.response.upload.token)
+        }).catch((e) => {
+          this.$emit('error', e)
+        })
+      },
+      addAttachment: function (token) {
+        this.ticket.comment.uploads.push(token)
       }
-
-
     }
   }
 </script>
