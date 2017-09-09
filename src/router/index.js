@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '@/components/Index'
-import Ticket from '@/components/Ticket'
-import Tickets from '@/components/Tickets'
 import Login from '@/components/Login'
 import Registration from '@/components/Registration'
 import Profile from '@/components/Profile'
 import Settings from '@/components/Settings'
+import Tickets from '@/components/Tickets'
+import TicketForm from '@/components/TicketForm'
+import Ticket from '@/components/Ticket'
 
 Vue.use(VueRouter)
 
@@ -25,7 +26,7 @@ export default new VueRouter({
     {
       path: '/tickets/new',
       name: 'Ticket',
-      component: Ticket
+      component: TicketForm
     },
     {
       path: '/tickets/:id',
@@ -35,7 +36,7 @@ export default new VueRouter({
     {
       path: '/tickets/:id/edit',
       name: 'Ticket',
-      component: Ticket
+      component: TicketForm
     },
     {
       path: '/login',
