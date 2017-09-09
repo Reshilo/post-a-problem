@@ -98,7 +98,7 @@
             console.log('Error: ', error)
           }
       if (!this.$auth.isAuthenticated()) {
-        window.location = '/#/login'
+        this.$router.push('/login')
       }
     },
     methods: {

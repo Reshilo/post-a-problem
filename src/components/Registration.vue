@@ -28,7 +28,7 @@
   export default {
     created: function () {
       if (this.$auth.isAuthenticated()) {
-        window.location = '/#/'
+        this.$router.push('/')
       }
     }
   }

@@ -15,7 +15,7 @@
   export default {
     created: function () {
       if (!this.$auth.isAuthenticated()) {
-        window.location = '/#/login'
+        this.$router.push('/login')
       }
     }
   }

@@ -1,14 +1,11 @@
 <template>
     <div>
-        <p>Your tickets</p>
-        <router-link :to="{ name: 'ticket_create'}" class="btn btn-default">Create</router-link>
-        <ul class="">
-            <li v-for="ticket in tickets">
-                <span>{{ticket.id}}</span>
-                <span>{{ticket.subject}}</span>
-                <router-link :to="{ name: 'ticket', params: { id: ticket.id }}" class="btn btn-default">Details</router-link>
-            </li>
-        </ul>
+        <h2>Your Tickets</h2>
+        <div class="list-group">
+            <router-link v-for="ticket in tickets" :to="{ name: 'ticket', params: { id: ticket.id }}" class="list-group-item list-group-item-action">
+                {{ticket.subject}}
+            </router-link>
+        </div>
     </div>
 </template>
 <script>
@@ -20,7 +17,7 @@
     },
     created: function () {
       if (!this.$auth.isAuthenticated()) {
-        window.location = '/#/login'
+        this.$router.push('/login')
       }
 
       var this_ = this

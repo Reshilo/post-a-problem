@@ -1,11 +1,15 @@
 <template>
     <div>
-        <h1>{{ticket.subject}}</h1>
-        <router-link :to="{ name: 'ticket_edit', params: { id: ticket.id }}" class="btn btn-default">Edit</router-link>
-        <p>{{ticket.description}}</p>
-        <hr>
+        <h1>
+            {{ticket.subject}}
+            <router-link :to="{ name: 'ticket_edit', params: { id: ticket.id }}" class="btn btn-secondary btn-sm">Edit</router-link>
+        </h1>
         <div v-for="comment in comments">
-            <p>{{comment.body}}</p>
+            <p>
+                <small class="text-muted">{{comment.created_at}}</small>
+                <br>
+                {{comment.body}}
+            </p>
             <img v-for="attachment in comment.attachments" v-bind:src="attachment.content_url">
         </div>
     </div>

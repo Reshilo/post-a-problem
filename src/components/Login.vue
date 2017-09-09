@@ -30,7 +30,7 @@
     },
     created: function () {
       if (this.$auth.isAuthenticated()) {
-        window.location = '/#/'
+        this.$router.push('/')
       }
     },
     methods: {
@@ -38,20 +38,16 @@
         if (this.$auth.isAuthenticated()) {
           this.$auth.logout()
         }
-
         this.response = null
-
         var this_ = this
         this.$auth.authenticate('zendesk').then(function (authResponse) {
-          console.log(authResponse)
-          console.log(this_.$auth.isAuthenticated())
-
           this_.$http.get('https://probprob.zendesk.com/api/v2/users/me.json', {
             headers: {
               Authorization: 'Bearer ' + this_.$auth.getToken()
             }
           }).then(function (response) {
             this_.response = response
+            this_.$router.push('/')
           })
         }).catch(function (err) {
           this_.response = err
