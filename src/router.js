@@ -5,7 +5,6 @@ import Settings from '@/components/Settings'
 import Tickets from '@/components/Tickets'
 import TicketForm from '@/components/TicketForm'
 import Ticket from '@/components/Ticket'
-import Media from '@/components/Media'
 import Login from '@/components/Login'
 
 Vue.use(VueRouter)
@@ -50,11 +49,6 @@ export default new VueRouter({
           path: 'settings',
           name: 'settings',
           component: Settings
-        },
-        {
-          path: '/media',
-          name: 'media',
-          component: Media
         },
         {
           path: '/login',

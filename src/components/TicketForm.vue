@@ -1,18 +1,19 @@
 <template>
     <div>
-        <h2>Create Ticket</h2>
-        <form @submit.prevent="submit()">
+        <h2>Prijavi problem</h2>
+        <form @submit.prevent="submit()" class="form">
             <div class="form-group">
-                <input v-model="ticket.subject" class="form-control" placeholder="Type Subject here">
+                <input v-model="ticket.subject" class="form-control" placeholder="Naslov">
             </div>
             <div class="form-group">
-                <input type="file" accept="image/*" v-on:change="handleAttachmentChange" class="form-control">
+              <label for="file-upload" class="file-upload btn">Zakači fajl</label>
+                <input type="file" id="file-upload" accept="image/*" v-on:change="handleAttachmentChange" class="form-control file-trigger">
             </div>
             <div class="form-group">
                 <textarea v-model="ticket.comment.body" class="form-control"
-                          placeholder="Type more details here"></textarea>
+                          placeholder="Opis"></textarea>
             </div>
-            <button :disabled="disabled" class="btn btn-primary btn-lg">Submit</button>
+            <button :disabled="disabled" class="btn btn-primary btn-lg">Pošalji</button>
         </form>
         <pre>{{ticket}}</pre>
         <!-- <button @click="turnCameraOn()">Turn camera on</button> -->

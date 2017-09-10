@@ -1,16 +1,16 @@
 <template>
   <div>
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
       <div class="container">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <router-link :to="{ name: 'ticket_list'}" class="navbar-brand">Reshilo</router-link>
+        <router-link :to="{ name: 'ticket_list'}" class="navbar-brand"><img src="../../static/img/logo.png" alt="slika"></router-link>
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <router-link :to="{ name: 'ticket_create'}" class="btn btn-secondary my-2 my-sm-0">
-                Create Ticket
+                Prijavi problem
               </router-link>
             </li>
           </ul>
