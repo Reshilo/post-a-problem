@@ -14,6 +14,7 @@
             </div>
             <button :disabled="disabled" class="btn btn-primary btn-lg">Submit</button>
         </form>
+        <pre>{{ticket}}</pre>
         <!-- <button @click="turnCameraOn()">Turn camera on</button> -->
         <!-- <button @click="takePicture()">Take picture</button>
         <video muted autoplay></video>
@@ -36,9 +37,7 @@
             uploads: []
           },
           priority: 'high',
-          type: 'problem',
-          map: '',
-          image: ''
+          type: 'problem'
         }
       }
     },
@@ -46,16 +45,21 @@
       if (!this.$auth.isAuthenticated()) {
         this.$router.push({name: 'login'})
       }
+
       var that = this
 
-      var gl = navigator.geolocation
-      gl.getCurrentPosition(function (position) {
-        var href = 'https://maps.googleapis.com/maps/api/staticmap?center=' + position.coords.latitude + ',' + position.coords.longitude + '&zoom=15&size=1200x1200&sensor=false'
-        href += '&markers=color:blue%7Clabel:S%7C' + position.coords.latitude + ',' + position.coords.longitude
-        var mapLink = '<a href="' + href + '">map</a>'
-        that.ticket.map = mapLink
-      }.bind(this))
+      if (!navigator.geolocation) {
+        console.warn('No geolocation')
+      } else {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          that.lat = position.coords.latitude
+          that.lng = position.coords.longitude
+        }, function (error) {
+          console.log(error)
+        })
+      }
 
+      /*
       navigator.mediaDevices.enumerateDevices()
         .then(gotDevices).then(getStream).catch(handleError)
 
@@ -107,10 +111,8 @@
       function handleError (error) {
         console.log('Error: ', error)
       }
+      */
 
-      if (!this.$auth.isAuthenticated()) {
-        this.$router.push({name: 'login'})
-      }
     },
     methods: {
       submit: function () {
@@ -132,20 +134,32 @@
 
         // })
         this_.$http.post('https://probprob.zendesk.com/api/v2/tickets.json', {
-          ticket: {
-            subject: this_.ticket.subject || '[' + new Date().getTime() + ']',
-            comment: {
-              body: this_.ticket.comment.body || '[' + new Date().getTime() + ']',
-              uploads: this_.ticket.comment.uploads
-            },
-            priority: this_.ticket.priority,
-            type: this_.ticket.type
+            ticket: {
+              subject: this_.ticket.subject || '[' + new Date().getTime() + ']',
+              comment: {
+                body: this_.ticket.comment.body || '[' + new Date().getTime() + ']',
+                uploads: this_.ticket.comment.uploads
+              },
+              priority: this_.ticket.priority,
+              type: this_.ticket.type,
+              custom_fields: [
+                {
+                  id: 114098500393,
+                  value: this_.lat
+                },
+                {
+                  id: 114098538614,
+                  value: this_.lng
+                }
+              ]
+            }
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + this_.$auth.getToken()
+            }
           }
-        }, {
-          headers: {
-            Authorization: 'Bearer ' + this_.$auth.getToken()
-          }
-        }).then(function (response) {
+        ).then(function (response) {
           this_.response = response
           this_.$router.push({name: 'ticket', params: {id: response.body.ticket.id}})
         })

@@ -10,6 +10,9 @@
                 <br>
                 {{comment.body}}
             </p>
+            <div>
+                <img v-bind:src="'https://maps.googleapis.com/maps/api/staticmap?center=' + ticket.position.lat + ',' + ticket.position.lng + '&zoom=13&size=600x300&maptype=roadmap&markers=' + ticket.position.lat + ',' + ticket.position.lng">
+            </div>
             <img v-for="attachment in comment.attachments" v-bind:src="attachment.content_url">
         </div>
     </div>
@@ -38,7 +41,7 @@
         }).then(function (response) {
           // success
           console.log(response)
-          this.ticket = response.body.ticket
+          this.ticket = this.parse(response.body.ticket)
         }, function () {
           // error
         })
@@ -60,6 +63,22 @@
     methods: {
       isNew: function () {
         !!this.$route.params.id
+      },
+      parse: function (object) {
+        if (object.custom_fields) {
+          object.position = {}
+          object.custom_fields.forEach(function (field) {
+            switch (field.id) {
+              case 114098500393:
+                object.position.lat = field.value
+                break
+              case 114098538614:
+                object.position.lng = field.value
+                break
+            }
+          })
+        }
+        return object
       }
     }
   }
