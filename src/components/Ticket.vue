@@ -10,7 +10,7 @@
                 <br>
                 {{comment.body}}
             </p>
-            <div>
+            <div v-if="ticket.position">
                 <img v-bind:src="'https://maps.googleapis.com/maps/api/staticmap?center=' + ticket.position.lat + ',' + ticket.position.lng + '&zoom=13&size=600x300&maptype=roadmap&markers=' + ticket.position.lat + ',' + ticket.position.lng">
             </div>
             <img v-for="attachment in comment.attachments" v-bind:src="attachment.content_url">
@@ -68,6 +68,10 @@
         if (object.custom_fields) {
           object.position = {}
           object.custom_fields.forEach(function (field) {
+            if (!field.value) {
+              object.position = null
+              return
+            }
             switch (field.id) {
               case 114098500393:
                 object.position.lat = field.value
